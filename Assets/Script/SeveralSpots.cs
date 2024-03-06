@@ -27,6 +27,7 @@ public class SeveralSpots : MonoBehaviour
     public int actualSpotPosition;
 
     public float speed;
+    public float spotRadius;
 
     List<Spot> spotsList;
 
@@ -34,7 +35,6 @@ public class SeveralSpots : MonoBehaviour
     //time
     public float myTotalTime; //for measuring the total time during the experiment
     public float myTime; //for setting the timeline
-    public float changedTime;//for going back at a certain moment
     public int frameNumber;
     public int myFrameNumber;
 
@@ -52,8 +52,12 @@ public class SeveralSpots : MonoBehaviour
 
     float sequenceDuration;
 
+    float timer;
+    int ok;
+
     void Start()
     {
+        //time setting
         myTime = 0f;
         myTotalTime = 0f;
         sequenceDuration = 15f;
@@ -61,12 +65,15 @@ public class SeveralSpots : MonoBehaviour
         myFrameNumber = 0;
         myTextArea = "start";
 
-        changedTime = Time.deltaTime;
+        //additional variables
+        timer = 0f;
 
+        //facade features at start
         speed = 0.2f;
         nrCircles = 2;
         nrOfSpots = 1;
         actualSpotPosition = spotsPosition = 0;
+        spotRadius = 0.6f;
 
 
         spotsList = new List<Spot>();
@@ -78,7 +85,7 @@ public class SeveralSpots : MonoBehaviour
         }
 
 
-        //spline animation
+        //spline animation for spotList as one GameObject
         mySplineAnimation = gameObject.AddComponent<SplineAnimate>();
         mySplineAnimation.Container = randomSpline;
         mySplineAnimation.Alignment = SplineAnimate.AlignmentMode.None;
@@ -105,10 +112,14 @@ public class SeveralSpots : MonoBehaviour
 
         // SetSpotCollection(ref List<Spot> spotsList, float _speed, int _nrCircles, int _nrOfSpots, int _spotsPosition)
 
-        if (myTime == 0.02f)
-        {
-            SetSpotCollection(ref spotsList, 0.2f, 2, 1, 0);
-        }
+        //if (myTime == 0.02f)
+        //{
+        //    SetSpotCollection(ref spotsList, 0.2f, 2, 1, 0);
+        //}
+
+
+        //START NARRATIVE
+
         if (myTime > 0.02 && myTime < sequenceDuration)
         {
             if (myTextArea != "Random facade") nrOfCurrentSequence++;
@@ -141,93 +152,172 @@ public class SeveralSpots : MonoBehaviour
                 nrCircles--;
             }
 
-            //speed += 0.005f;
             speed = (Mathf.Sin(myTime / 15f * 2f * Mathf.PI) + 2f) / 2f;
 
             SetSpotCollection(ref spotsList, speed, nrCircles, nrOfSpots, spotsPosition);
 
+
+
+
         }
-        if (myTime == sequenceDuration)
+
+        //if (myTime == sequenceDuration)
+        //{
+        //    ChangeSpotRadius(ref spotsList, 0.6f);
+
+        //}
+
+
+
+        //if (myTime > sequenceDuration && myTime < 2 * sequenceDuration)
+        //{
+        //    if (myTextArea != "Random facade 2") nrOfCurrentSequence++;
+        //    myTextArea = "Random facade 2";
+
+        //    nrCircles = 8;
+        //    speed = (Mathf.Sin(myTime / 15f * 2f * Mathf.PI) + 2f) / 2f;
+
+        //    if ((myTime == 18f) ||
+        //        (myTime == 21f) ||
+        //        (myTime == 25f))
+        //    {
+        //        nrCircles++;
+        //    }
+
+        //    if (myTime == 25f) nrOfSpots = 20;
+
+        //    SetSpotCollection(ref spotsList, speed, nrCircles, nrOfSpots, spotsPosition);
+
+        //}
+
+
+        //if (myTime == 2 * sequenceDuration)
+        //{
+        //    if (myTextArea != "medium speed") nrOfCurrentSequence++;
+        //    myTextArea = "medium speed";
+
+        //    ChangeNrCirclesOnSpot(ref spotsList, 3);
+        //    ChangeNrOfSpots(ref spotsList, 10);
+        //    ChangeAnimationSpeed(ref spotsList, 0.5f);
+        //}
+
+
+        //if (myTime == 3 * sequenceDuration)
+        //{
+        //    if (myTextArea != "low speed") nrOfCurrentSequence++;
+        //    myTextArea = "low speed";
+
+        //    ChangeAnimationSpeed(ref spotsList, 0.1f);
+        //}
+
+
+        //if (myTime == 4 * sequenceDuration)
+        //{
+        //    if (myTextArea != "high speed") nrOfCurrentSequence++;
+        //    myTextArea = "high speed";
+
+        //    ChangeAnimationSpeed(ref spotsList, 2f);
+        //}
+
+
+        //if (myTime == 5 * sequenceDuration)
+        //{
+        //    if (myTextArea != "low nr of spots, medium speed") nrOfCurrentSequence++;
+        //    myTextArea = "low nr of spots, medium speed";
+
+        //    ChangeAnimationSpeed(ref spotsList, 0.5f);
+        //    ChangeNrOfSpots(ref spotsList, 3);
+        //}
+
+
+        //if (myTime == 6 * sequenceDuration)
+        //{
+        //    if (myTextArea != "medium nr of spots, medium speed") nrOfCurrentSequence++;
+        //    myTextArea = "medium nr of spots, medium speed";
+
+        //    ChangeNrOfSpots(ref spotsList, 10);
+        //}
+
+
+        //if (myTime == 7 * sequenceDuration)
+        //{
+        //    if (myTextArea != "high nr of spots, medium speed") nrOfCurrentSequence++;
+        //    myTextArea = "high nr of spots, medium speed";
+
+        //    ChangeNrOfSpots(ref spotsList, 30);
+        //}
+
+        if (myTime == nrOfCurrentSequence * sequenceDuration)
         {
-            //myFrameNumber = 0;
+            if (myTextArea != "explosion with big radius") nrOfCurrentSequence++;
+            myTextArea = "explosion with big radius";
+
+            ok = 1;
+            timer = 0.1f;
+            SetSpotCollection(ref spotsList, 0.2f, 3, 3, spotsPosition);
+
         }
 
-
-        if (myTime > sequenceDuration && myTime < 2 * sequenceDuration)
+        if (myTime > nrOfCurrentSequence * sequenceDuration && myTime < nrOfCurrentSequence * sequenceDuration)
         {
-            if (myTextArea != "Random facade 2") nrOfCurrentSequence++;
-            myTextArea = "Random facade 2";
 
-            nrCircles = 8;
-            speed = (Mathf.Sin(myTime / 15f * 2f * Mathf.PI) + 2f) / 2f;
-            
-            if ((myTime == 18f) ||
-                (myTime == 21f) ||
-                (myTime == 25f))
+            if (timer < 3)
             {
-                nrCircles++;
+                timer += 0.05f;
+
+            }
+            else
+            {
+                timer = 0.1f;
+                ok = ok * (-1);
             }
 
-            if (myTime == 25f) nrOfSpots = 20;
-
-            SetSpotCollection(ref spotsList, speed, nrCircles, nrOfSpots, spotsPosition);
-
+            if (ok == 1)
+            {
+                ChangeSpotRadius(ref spotsList, timer);
+            }
+            else if (ok == -1)
+            {
+                ChangeSpotRadius(ref spotsList, 3.2f - timer);
+            }
         }
 
 
-        if (myTime == 2 * sequenceDuration )
+
+        if (myTime == nrOfCurrentSequence * sequenceDuration)
         {
-            if (myTextArea != "medium speed") nrOfCurrentSequence++;
-            myTextArea = "medium speed";
+            if (myTextArea != "explosion with small radius") nrOfCurrentSequence++;
+            myTextArea = "explosion with small radius";
 
-            ChangeNrCirclesOnSpot(ref spotsList, 3);
-            ChangeNrOfSpots(ref spotsList, 10);
-            ChangeAnimationSpeed(ref spotsList, 0.5f);
+            ok = 1;
+            timer = 0.1f;
+            SetSpotCollection(ref spotsList, 0.2f, 3, 3, spotsPosition);
+
         }
 
-
-        if (myTime > 3 * sequenceDuration && myTime < 3 * sequenceDuration + 1f)
+        if (myTime > nrOfCurrentSequence * sequenceDuration && myTime < (nrOfCurrentSequence+1 )* sequenceDuration)
         {
-            myTextArea = "low speed";
 
-            ChangeAnimationSpeed(ref spotsList, 0.1f);
+            if (timer < 0.8)
+            {
+                timer += 0.05f;
+
+            }
+            else
+            {
+                timer = 0.1f;
+                ok = ok * (-1);
+            }
+
+            if (ok == 1)
+            {
+                ChangeSpotRadius(ref spotsList, timer);
+            }
+            else if (ok == -1)
+            {
+                ChangeSpotRadius(ref spotsList, 0.9f - timer);
+            }
         }
-
-
-        if (myTime > 4 * sequenceDuration && myTime < 4 * sequenceDuration + 1f)
-        {
-            myTextArea = "high speed";
-
-            ChangeAnimationSpeed(ref spotsList, 2f);
-        }
-
-
-        if (myTime > 5 * sequenceDuration && myTime < 5 * sequenceDuration + 1f)
-        {
-            myTextArea = "low nr of spots, medium speed";
-
-            ChangeAnimationSpeed(ref spotsList, 0.5f);
-            ChangeNrOfSpots(ref spotsList, 3);
-        }
-
-
-        if (myTime > 6 * sequenceDuration && myTime < 6 * sequenceDuration + 1f)
-        {
-            myTextArea = "medium nr of spots, medium speed";
-
-            ChangeNrOfSpots(ref spotsList, 10);
-        }
-
-
-        if (myTime > 7 * sequenceDuration && myTime < 7 * sequenceDuration + 1f)
-        {
-            myTextArea = "high nr of spots, medium speed";
-
-            ChangeNrOfSpots(ref spotsList, 20);
-        }
-
-        if (myTime > 95f && myTime < 96.02f)
-
 
 
 
@@ -294,7 +384,7 @@ public class SeveralSpots : MonoBehaviour
             }
             else if (_nrOfSpots > spotsList.Count)
             {
-                MakeSpots(_nrOfSpots - spotsList.Count, -1f, 6f, -1f, 4f);
+                MakeSpots(_nrOfSpots - spotsList.Count, -1f, 5f, -1f, 4f);
             }
 
             //update spotsList attributes
@@ -374,7 +464,20 @@ public class SeveralSpots : MonoBehaviour
         }
     }
 
+    //change spot radius for all spots in the list
+    public void ChangeSpotRadius(ref List<Spot> spotsList, float _spotRadius)
+    {
+        if (spotsList.Count != 0)
+        {
+            foreach (var spot in spotsList)
+            {
+                if (spot.spotRadius != _spotRadius)
+                    spot.spotRadius = _spotRadius;
+            }
+            this.spotRadius = _spotRadius;
+        }
 
+    }
 
 
 

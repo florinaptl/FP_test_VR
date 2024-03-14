@@ -137,29 +137,29 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].speed = 2f;
         myNarrative[k].nrCircles = 3;
         myNarrative[k].nrOfSpots = 10;
-        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotRadius = 0.4f;
         myNarrative[k].spotsPosition = 0;
         myNarrative[k].validated = true;
 
         //sequence 3
         k++;
-        myNarrative[k].name = "high speed";
+        myNarrative[k].name = "high speed high nr of spots";
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 5f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 10;
+        myNarrative[k].nrOfSpots = 50;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
         //sequence 4
         k++;
-        myNarrative[k].name = "high nr of spots medium speed";
+        myNarrative[k].name = "medium speed high nr of spots ";
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].nrOfSpots = 50;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
@@ -170,13 +170,13 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 3;
+        myNarrative[k].nrOfSpots = 5;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
         //sequence 6
         k++;
-        myNarrative[k].name = "medium speed";
+        myNarrative[k].name = "medium speed medium number of spots";
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 0.5f;
@@ -191,7 +191,7 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 0.5f;
-        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrCircles = 5;
         myNarrative[k].nrOfSpots = 10;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
@@ -225,7 +225,7 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 10;
+        myNarrative[k].nrOfSpots = 20;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 1;
 
@@ -236,7 +236,7 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 5;
-        myNarrative[k].nrOfSpots = 8;
+        myNarrative[k].nrOfSpots = 15;
         myNarrative[k].spotRadius = 1f;
         myNarrative[k].spotsPosition = 0;
 
@@ -247,10 +247,31 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 10;
+        myNarrative[k].nrOfSpots = 15;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 3;
 
+        //sequence 13
+        k++;
+        myNarrative[k].name = "high speed few spots";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 4f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 0.8f;
+        myNarrative[k].spotsPosition = 0;
+
+        //sequence 14
+        k++;
+        myNarrative[k].name = "u";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 0.8f;
+        myNarrative[k].spotsPosition = 0;
         //SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition);
 
 
@@ -291,7 +312,8 @@ public class SeveralSpots : MonoBehaviour
             if ((myTime == 12f) ||
                 (myTime == 14f))
             {
-                myNarrative[nrOfCurrentSequence].nrCircles--;
+                myNarrative[nrOfCurrentSequence].nrCircles++;
+                myNarrative[nrOfCurrentSequence].spotRadius += 0.4f;
             }
 
             myNarrative[nrOfCurrentSequence].speed = (Mathf.Sin(myTime / 15f * 2f * Mathf.PI) + 2f) / 2f;
@@ -309,10 +331,10 @@ public class SeveralSpots : MonoBehaviour
                 (myTime == 21f) ||
                 (myTime == 25f))
             {
-                myNarrative[nrOfCurrentSequence].nrCircles++;
+                myNarrative[nrOfCurrentSequence].nrCircles+=3;
             }
 
-            if (myTime == 25f) myNarrative[nrOfCurrentSequence].nrOfSpots = 20;
+            //if (myTime == 25f) myNarrative[nrOfCurrentSequence].nrOfSpots = 20;
 
             int k = nrOfCurrentSequence;
             SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);

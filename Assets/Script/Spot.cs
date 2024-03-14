@@ -48,7 +48,7 @@ public class Spot : MonoBehaviour
 
 
 
-        previousOpacityDegree = opacityDegree = 2.5f;
+        previousOpacityDegree = opacityDegree = 4.3f;
         previousOpacityGradient = opacityGradient = 0.4f;
         previousNrCircles =  6;
         previousSpotRadius = spotRadius = 0.6f;

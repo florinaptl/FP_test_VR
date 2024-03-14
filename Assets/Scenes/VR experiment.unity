@@ -16,28 +16,28 @@ RenderSettings:
   serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogMode: 1
+  m_FogDensity: 0.07
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.91
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6f8a62994b641f44099fb41efb7b97a0, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 2048
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 457865559}
   m_IndirectSpecularColor: {r: 0.44520235, g: 0.4948209, b: 0.5738614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5da322f6f28fc124889132b84ca5780e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 1437529097470485046, guid: 1f0c8b9933f442d48890fc43c8be26a7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 10c8542d4324afc4bb4d61e51e00800e, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d240883e6b399c4bae45ef9a250a32b, type: 2}
     - target: {fileID: 3753826434631335978, guid: 1f0c8b9933f442d48890fc43c8be26a7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5f469581b50505747a410deecdf8f11d, type: 2}
+    - target: {fileID: 6611584189118249950, guid: 1f0c8b9933f442d48890fc43c8be26a7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb7d7a07b2942ca4cb6a6c38d807c8ea, type: 2}
     - target: {fileID: 7272830939566295785, guid: 1f0c8b9933f442d48890fc43c8be26a7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -932,7 +936,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1.59
+  m_Intensity: 1.24
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -990,13 +994,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457865558}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39207762, y: 0.3489742, z: -0.23964487, w: 0.81673896}
+  m_LocalRotation: {x: 0.32147005, y: 0.35366255, z: -0.21730933, w: 0.8510914}
   m_LocalPosition: {x: -3.5, y: 13.92, z: -9.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 53.873, y: 40.401, z: -11.526}
+  m_LocalEulerAnglesHint: {x: 44.5, y: 40.401, z: -11.526}
 --- !u!1001 &508680552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1383,6 +1387,9 @@ MonoBehaviour:
   validMaterial: {fileID: 2100000, guid: b95bb44abf38143419c5459f5927da20, type: 2}
   invalidMaterial: {fileID: 2100000, guid: ac7fedac0c3230e4bb8cff69aa4c95a1, type: 2}
   myEmotion: 
+  wasValidated: 0
+  mySeveralSpots: {fileID: 803447764}
+  participantName: AlexandruC
 --- !u!65 &645465447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1767,16 +1774,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPrefab: {fileID: 6819762763554405283, guid: f7d6f8b8c3d27324ebb85281b3bd5724, type: 3}
-  myValidateSAM: {fileID: 0}
+  myValidateSAM: {fileID: 645465446}
   spotPrefab: {fileID: -4584339628045566931, guid: ae334d247e23dcb45b789d63f645e362, type: 3}
   nrOfSpots: 10
   nrCircles: 5
   spotsPosition: 0
   actualSpotPosition: 0
   speed: 0
+  spotRadius: 0
   myTotalTime: 0
   myTime: 0
-  changedTime: 0
+  frameNumber: 0
+  myFrameNumber: 0
   myTextArea: 
   nrOfCurrentSequence: 0
   randomSpline: {fileID: 1999974546}
@@ -2296,9 +2305,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337108583}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.4700003, y: 1.8476005, z: 2.1675003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 4.393, y: 0.17, z: 6.06}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 946875036}
@@ -2307,7 +2316,7 @@ Transform:
   - {fileID: 2040317080}
   - {fileID: 645465445}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!1001 &1357253526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3016,7 +3025,7 @@ Skybox:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992897982}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CustomSkybox: {fileID: 2100000, guid: fa16b1fabb54cd44fbddfe88b3d6d072, type: 2}
 --- !u!114 &1999974546 stripped
 MonoBehaviour:

@@ -32,11 +32,11 @@ public class ValidateSAM_Interactable : XRBaseInteractable
 
     override protected void OnActivated(ActivateEventArgs args)
     {
-        Debug.Log("validation clicked");
+
         //write the values to file
-        myValidateSAM.myEmotion[0] = myValidateSAM.pleasureValue = 0;
-        myValidateSAM.myEmotion[1] = myValidateSAM.arousalValue = 0;
-        myValidateSAM.myEmotion[2] = myValidateSAM.dominanceValue = 0;
+        myValidateSAM.Validate();
+
+
     }
 
 

@@ -11,7 +11,6 @@ public class Feedback_Interactable : XRBaseInteractable
     void Start()
     {
         myFeedback = GetComponent<Feedback_SAM_button>();
-        
     }
 
     // Update is called once per frame

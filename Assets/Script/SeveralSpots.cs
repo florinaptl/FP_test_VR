@@ -16,7 +16,7 @@ public class SeveralSpots : MonoBehaviour
 
     //spots attributes
 
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(1, 50)]
     public int nrOfSpots;
 
     [SerializeField, Range(1, 30)]
@@ -139,16 +139,15 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].nrOfSpots = 10;
         myNarrative[k].spotRadius = 0.4f;
         myNarrative[k].spotsPosition = 0;
-        myNarrative[k].validated = true;
 
         //sequence 3
         k++;
-        myNarrative[k].name = "high speed high nr of spots";
+        myNarrative[k].name = "low speed few spots";
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 5f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 50;
+        myNarrative[k].nrOfSpots = 8;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
@@ -181,7 +180,7 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.5f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 10;
+        myNarrative[k].nrOfSpots = 15;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
@@ -225,7 +224,7 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 20;
+        myNarrative[k].nrOfSpots = 30;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 1;
 
@@ -247,24 +246,13 @@ public class SeveralSpots : MonoBehaviour
 
         myNarrative[k].speed = 0.2f;
         myNarrative[k].nrCircles = 3;
-        myNarrative[k].nrOfSpots = 15;
+        myNarrative[k].nrOfSpots = 30;
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 3;
 
         //sequence 13
         k++;
-        myNarrative[k].name = "high speed few spots";
-        myNarrative[k].number = k;
-
-        myNarrative[k].speed = 4f;
-        myNarrative[k].nrCircles = 5;
-        myNarrative[k].nrOfSpots = 5;
-        myNarrative[k].spotRadius = 0.8f;
-        myNarrative[k].spotsPosition = 0;
-
-        //sequence 14
-        k++;
-        myNarrative[k].name = "u";
+        myNarrative[k].name = "low speed few spots";
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 0.1f;
@@ -272,6 +260,30 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].nrOfSpots = 5;
         myNarrative[k].spotRadius = 0.8f;
         myNarrative[k].spotsPosition = 0;
+
+        //sequence 14
+        k++;
+        myNarrative[k].name = "big spot radius many circles";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 20;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
+
+        //sequence 14
+        k++;
+        myNarrative[k].name = "big spot radius few circles";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
+
+
         //SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition);
 
 

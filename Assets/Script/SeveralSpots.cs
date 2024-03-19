@@ -63,6 +63,8 @@ public class SeveralSpots : MonoBehaviour
     public Slider slider_spotRadius;
     public Slider slider_spotsPosition;
 
+    public Canvas myExamplesCanvas;
+
 
 
     void Start()
@@ -106,7 +108,7 @@ public class SeveralSpots : MonoBehaviour
 
         //CUSTOM CANVAS
         myCustomizationCanvas.enabled = false;
-
+        myExamplesCanvas.enabled = false;
 
 
         //MAKE NARRATIVE
@@ -128,173 +130,173 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
-        ////sequence 1
-        //k++;
-        //myNarrative[k].name = "random 1";
-        //myNarrative[k].number = k;
+        //sequence 1
+        k++;
+        myNarrative[k].name = "random 1";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 1;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
-        //myNarrative[k].validated = true;
+        myNarrative[k].speed = 2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 1;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
+        myNarrative[k].validated = true;
 
-        ////sequence 2
-        //k++;
-        //myNarrative[k].name = "random 2";
-        //myNarrative[k].number = k;
+        //sequence 2
+        k++;
+        myNarrative[k].name = "random 2";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 10;
-        //myNarrative[k].spotRadius = 0.4f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 10;
+        myNarrative[k].spotRadius = 0.4f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 3
-        //k++;
-        //myNarrative[k].name = "low speed few spots";
-        //myNarrative[k].number = k;
+        //sequence 3
+        k++;
+        myNarrative[k].name = "low speed few spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 5f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 8;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 5f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 8;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 4
-        //k++;
-        //myNarrative[k].name = "medium speed high nr of spots ";
-        //myNarrative[k].number = k;
+        //sequence 4
+        k++;
+        myNarrative[k].name = "medium speed high nr of spots ";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 50;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 50;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 5
-        //k++;
-        //myNarrative[k].name = "explosion with big radius";
-        //myNarrative[k].number = k;
+        //sequence 5
+        k++;
+        myNarrative[k].name = "explosion with big radius";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 5;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 6
-        //k++;
-        //myNarrative[k].name = "medium speed medium number of spots";
-        //myNarrative[k].number = k;
+        //sequence 6
+        k++;
+        myNarrative[k].name = "medium speed medium number of spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.5f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 15;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.5f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 15;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 7
-        //k++;
-        //myNarrative[k].name = "explosion with small radius";
-        //myNarrative[k].number = k;
+        //sequence 7
+        k++;
+        myNarrative[k].name = "explosion with small radius";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.5f;
-        //myNarrative[k].nrCircles = 5;
-        //myNarrative[k].nrOfSpots = 10;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.5f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 10;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 8
-        //k++;
-        //myNarrative[k].name = "low speed high number of spots";
-        //myNarrative[k].number = k;
+        //sequence 8
+        k++;
+        myNarrative[k].name = "low speed high number of spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.1f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 50;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 50;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 9
-        //k++;
-        //myNarrative[k].name = "density of many compact spots";
-        //myNarrative[k].number = k;
+        //sequence 9
+        k++;
+        myNarrative[k].name = "density of many compact spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 7;
-        //myNarrative[k].nrOfSpots = 30;
-        //myNarrative[k].spotRadius = 0.3f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 7;
+        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].spotRadius = 0.3f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 10
-        //k++;
-        //myNarrative[k].name = "lower area position";
-        //myNarrative[k].number = k;
+        //sequence 10
+        k++;
+        myNarrative[k].name = "lower area position";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 30;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 1;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 1;
 
-        ////sequence 11
-        //k++;
-        //myNarrative[k].name = "density of few loose spots";
-        //myNarrative[k].number = k;
+        //sequence 11
+        k++;
+        myNarrative[k].name = "density of few loose spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 5;
-        //myNarrative[k].nrOfSpots = 15;
-        //myNarrative[k].spotRadius = 1f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 15;
+        myNarrative[k].spotRadius = 1f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 12
-        //k++;
-        //myNarrative[k].name = "top area position";
-        //myNarrative[k].number = k;
+        //sequence 12
+        k++;
+        myNarrative[k].name = "top area position";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 30;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 3;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 3;
 
-        ////sequence 13
-        //k++;
-        //myNarrative[k].name = "low speed few spots";
-        //myNarrative[k].number = k;
+        //sequence 13
+        k++;
+        myNarrative[k].name = "low speed few spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.1f;
-        //myNarrative[k].nrCircles = 5;
-        //myNarrative[k].nrOfSpots = 5;
-        //myNarrative[k].spotRadius = 0.8f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 0.8f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 14
-        //k++;
-        //myNarrative[k].name = "big spot radius many circles";
-        //myNarrative[k].number = k;
+        //sequence 14
+        k++;
+        myNarrative[k].name = "big spot radius many circles";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.1f;
-        //myNarrative[k].nrCircles = 20;
-        //myNarrative[k].nrOfSpots = 5;
-        //myNarrative[k].spotRadius = 1.2f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 20;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 14
-        //k++;
-        //myNarrative[k].name = "big spot radius few circles";
-        //myNarrative[k].number = k;
+        //sequence 15
+        k++;
+        myNarrative[k].name = "big spot radius few circles";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.1f;
-        //myNarrative[k].nrCircles = 5;
-        //myNarrative[k].nrOfSpots = 5;
-        //myNarrative[k].spotRadius = 1.2f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 14
+        //sequence 16
         k++;
         myNarrative[k].name = "custom";
         myNarrative[k].number = k;
@@ -329,6 +331,12 @@ public class SeveralSpots : MonoBehaviour
 
 
         nrOfCurrentSequence = (int)(myTime / sequenceDuration);
+
+        if (myNarrative[nrOfCurrentSequence].name == "initial mood")
+        {
+            myExamplesCanvas.enabled = true;
+        } else myExamplesCanvas.enabled = false;
+
 
         //CUSTOM CANVAS
         if (myNarrative[nrOfCurrentSequence].name == "custom")
@@ -507,7 +515,15 @@ public class SeveralSpots : MonoBehaviour
         //ChangeAnimationSpeed(ref spotsList, speed);
 
 
-
+        //update sliders
+        if (myCustomizationCanvas.enabled == true)
+        {
+            slider_nrOfSpots.value=this.nrOfSpots;
+            slider_speed.value = this.speed;
+            slider_nrCircles.value = this.nrCircles;
+            slider_spotRadius.value = this.spotRadius;
+            slider_spotsPosition.value = this.spotsPosition;
+        }
 
 
 

@@ -416,14 +416,14 @@ public class SeveralSpots : MonoBehaviour
         myCustomNarrative[0] = myNarrative[0]; //make first sequence the inital mood
 
         //last element has index totalNrOfSequences-1 and the sup limit is excluded so add 1, also -4 (3 custom and final mood)
-        myCustomNarrative[1] = myNarrative[Random.Range(1, totalNrOfSequences - 1 - 4 + 1)]; 
+        myCustomNarrative[1] = myNarrative[Random.Range(1, totalNrOfSequences - 1 - 4 + 1)];
         //generate sequences for sequence 2 and 3, different
         for (int i = 2; i <= 3; i++)
         {
             bool randomTest = false;
             int iterations = 0;
             int rnd = 0;
-            while (randomTest == false && iterations < 20)
+            while (randomTest == false && iterations < 30)
             {
                 iterations++;
                 rnd = Random.Range(1, totalNrOfSequences - 1 - 4 + 1);
@@ -435,6 +435,11 @@ public class SeveralSpots : MonoBehaviour
                 }
             }
             myCustomNarrative[i] = myNarrative[rnd];
+            if (iterations == 30)
+            {
+                Debug.Log("iteration " + iterations + "reached maximum");
+            }
+            else Debug.Log("iteration " + iterations);
         }
 
         for (int i = 0; i < totalNrOfSequences; i++)
@@ -921,14 +926,14 @@ public class SeveralSpots : MonoBehaviour
             {
                 foreach (var spot in spotsList)
                 {
-                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(-0.2f, 3f), 0f);
+                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(0f, facadeHeight), 0f);
                 }
             }
             else if (_spotsPosition == 1)
             {
                 foreach (var spot in spotsList)
                 {
-                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(-0.2f, 0.5f), 0f);
+                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(0f, facadeHeight / 3f - 0.3f), 0f);
                 }
             }
 
@@ -936,14 +941,14 @@ public class SeveralSpots : MonoBehaviour
             {
                 foreach (var spot in spotsList)
                 {
-                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(0.8f, 1.5f), 0f);
+                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(facadeHeight / 3f, 2f * facadeHeight / 3f - 0.3f), 0f);
                 }
             }
             else if (_spotsPosition == 3)
             {
                 foreach (var spot in spotsList)
                 {
-                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(1.8f, 3f), 0f);
+                    spot.transform.localPosition = new Vector3(spot.transform.localPosition.x, Random.Range(2f * facadeHeight / 3f, facadeHeight), 0f);
                 }
             }
 

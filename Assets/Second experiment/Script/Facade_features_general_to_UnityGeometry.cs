@@ -42,6 +42,10 @@ public class Facade_features_general_to_UnityGeometry : MonoBehaviour
     public int test_nrMinUnits;
     public bool recalculate;
 
+    public Toggle social;
+    public Toggle work;
+    public Toggle relax;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -150,6 +154,24 @@ public class Facade_features_general_to_UnityGeometry : MonoBehaviour
             }
         }
 
+
+        if (my_severalSpots.myTextArea == "general custom1")
+        {
+            relax.gameObject.SetActive(true);
+        }
+        else relax.gameObject.SetActive(false);
+
+        if (my_severalSpots.myTextArea == "general custom2")
+        {
+            work.gameObject.SetActive(true);
+        }
+        else work.gameObject.SetActive(false);
+
+        if (my_severalSpots.myTextArea == "general custom3")
+        {
+            social.gameObject.SetActive(true);
+        }
+        else social.gameObject.SetActive(false);
 
         test_nrMinUnits = (CalculateNrOfMinUnitsPerSpot(this.nrCircles_, this.elementBoundingRadius_));
 

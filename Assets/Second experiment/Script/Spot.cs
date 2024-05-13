@@ -19,6 +19,8 @@ public class Spot : MonoBehaviour
     [SerializeField, Range(0f, 4f)]
     public float spotRadius;
 
+    public int spot_nrOfMinUnits;
+
     public Transform[] points;
 
     public List<Transform> pointsList;
@@ -140,14 +142,15 @@ public class Spot : MonoBehaviour
         //int totalNrUnits = 0;
         int nrSegments = 0;
 
-
+        spot_nrOfMinUnits = 0;
         for (int k = (int)nrCircles; k >= 0; k--)
         {
             //for having the minimalUnitRadius proportional to spotRadius
             //float mUnitRadius = spotRadius / (2 * opacityDegree + 1.2f * (Mathf.Log(k + 1f, 2f)) + 1);
 
             //for having the minimaUnitRadius constant
-            float mUnitRadius = 0.6f / (2 * opacityDegree + 1.2f * (Mathf.Log(k + 1f, 2f)) + 1);
+            //float mUnitRadius = 0.6f / (2 * opacityDegree + 1.2f * (Mathf.Log(k + 1f, 2f)) + 1);
+            float mUnitRadius = 0.052f;
             circleRadius = spotRadius * (k / nrCircles);
             //make gradient in radial circles
             if (k != 0 && k != nrCircles)
@@ -160,7 +163,7 @@ public class Spot : MonoBehaviour
             else nrSegments = (int)(k == 0 ? 1 : Mathf.Sqrt(k * circleRadius * 100) + 2 + k);
 
             Vector3[] circlePoints = DrawCirclePoints(nrSegments, circleRadius, testOrigin, (k % 2 != 0 ? 0f : 1f)); //offset when 1
-
+            spot_nrOfMinUnits += nrSegments;
             //Debug
             //Debug.Log("nr Points on circle " + k + " is " + (int)(Mathf.Sqrt(k / 2f * circleRadius * 100) + 3));
             //totalNrUnits += (int)(Mathf.Sqrt(k / 2f * circleRadius * 100) + 3);

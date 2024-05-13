@@ -17,10 +17,10 @@ public class SeveralSpots : MonoBehaviour
 
     //spots attributes
 
-    [SerializeField, Range(1, 50)]
+    // [SerializeField, Range(1, 50)]
     public int nrOfSpots;
 
-    [SerializeField, Range(1, 30)]
+    //[SerializeField, Range(1, 30)]
     public int nrCircles;
 
     //spotsPosition - 0=everywere on facade(y in range (0, 3f)), 1=buttom (y in range (0, 1f)), 2=center (y in range (1, 2f)), 3=up (y in range (2, 3f))
@@ -28,6 +28,8 @@ public class SeveralSpots : MonoBehaviour
     public int spotsPosition;
     public int actualSpotPosition;
     public float speed;
+
+    //[SerializeField, Range(0.01f, 3f)]
     public float spotRadius;
     List<Spot> spotsList;
 
@@ -40,6 +42,8 @@ public class SeveralSpots : MonoBehaviour
     //narrative
     float sequenceDuration;
     public Sequence[] myNarrative;
+    public Sequence[] myCustomNarrative;
+    public int totalNrOfSequences;
     float timer;
     int ok;
 
@@ -64,11 +68,23 @@ public class SeveralSpots : MonoBehaviour
     public Slider slider_spotsPosition;
 
     public Canvas myExamplesCanvas;
+    public Canvas myGeneralCustomizationCanvas;
+
+    public float facadeBase, facadeHeight, facadeDiag, facadeArea, centerLine, centerlineRange, compactness_facade_percentage;
+    [SerializeField, Range(0f, 1f)]
+    public float _compactness_facade_percentage;
+    [SerializeField, Range(0f, 1f)]
+    public float _centerlineRange;
+
+    GameObject centerlineGameObj;
 
 
 
     void Start()
     {
+
+        Application.targetFrameRate = 50;
+
         //time setting
         myTime = 0f;
         myTotalTime = 0f;
@@ -87,13 +103,30 @@ public class SeveralSpots : MonoBehaviour
         actualSpotPosition = spotsPosition = 0;
         spotRadius = 0.6f;
 
+        //describe facade
+        facadeBase = 6f;
+        facadeHeight = 3.5f;
+        facadeDiag = Mathf.Sqrt(facadeBase * facadeBase + facadeHeight * facadeHeight);
+        facadeArea = facadeBase * facadeHeight;
+        centerLine = facadeHeight / 2f;
+        compactness_facade_percentage = 0f;
+        _compactness_facade_percentage = 0f;
+        centerlineRange = 0.5f;
+        _centerlineRange = 0.5f;
+
+        centerlineGameObj = new GameObject();
+        centerlineGameObj.transform.SetParent(this.transform, false);
+        centerlineGameObj.name = "centerlineGameObj";
+        centerlineGameObj.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+        GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
 
         spotsList = new List<Spot>();
 
-        MakeSpots(1, 0f, 0f, 0f, 0f);
+        MakeSpots(1, facadeBase / 2f, facadeBase / 2f, facadeHeight / 2f, facadeHeight / 2f);
         if (nrOfSpots > 1)
         {
-            MakeSpots(nrOfSpots - 1, -0.2f, 5f, -0.2f, 3f);
+            MakeSpots(nrOfSpots - 1, 0f, facadeBase, 0f, facadeHeight);
         }
 
 
@@ -109,11 +142,13 @@ public class SeveralSpots : MonoBehaviour
         //CUSTOM CANVAS
         myCustomizationCanvas.enabled = false;
         myExamplesCanvas.enabled = false;
+        myGeneralCustomizationCanvas.enabled = false;
 
 
         //MAKE NARRATIVE
         int k;
         myNarrative = new Sequence[20];
+        myCustomNarrative = new Sequence[20];
         for (int i = 0; i < 20; i++)
         {
             myNarrative[i] = new Sequence();
@@ -130,7 +165,7 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].spotRadius = 0.6f;
         myNarrative[k].spotsPosition = 0;
 
-        ////sequence 1
+        ////sequence
         //k++;
         //myNarrative[k].name = "random 1";
         //myNarrative[k].number = k;
@@ -142,7 +177,7 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotsPosition = 0;
         //myNarrative[k].validated = true;
 
-        ////sequence 2
+        ////sequence
         //k++;
         //myNarrative[k].name = "random 2";
         //myNarrative[k].number = k;
@@ -164,18 +199,18 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotRadius = 0.6f;
         //myNarrative[k].spotsPosition = 0;
 
-        ////sequence 4
-        //k++;
-        //myNarrative[k].name = "medium speed high nr of spots ";
-        //myNarrative[k].number = k;
+        //sequence 1
+        k++;
+        myNarrative[k].name = "medium speed high nr of spots ";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 50;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 50;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 5
+        ////sequence
         //k++;
         //myNarrative[k].name = "explosion with big radius";
         //myNarrative[k].number = k;
@@ -186,7 +221,7 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotRadius = 0.6f;
         //myNarrative[k].spotsPosition = 0;
 
-        ////sequence 6
+        ////sequence
         //k++;
         //myNarrative[k].name = "medium speed medium number of spots";
         //myNarrative[k].number = k;
@@ -197,7 +232,7 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotRadius = 0.6f;
         //myNarrative[k].spotsPosition = 0;
 
-        ////sequence 7
+        ////sequence
         //k++;
         //myNarrative[k].name = "explosion with small radius";
         //myNarrative[k].number = k;
@@ -208,7 +243,7 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotRadius = 0.6f;
         //myNarrative[k].spotsPosition = 0;
 
-        ////sequence 8
+        ////sequence
         //k++;
         //myNarrative[k].name = "low speed high number of spots";
         //myNarrative[k].number = k;
@@ -219,49 +254,49 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotRadius = 0.6f;
         //myNarrative[k].spotsPosition = 0;
 
-        ////sequence 9
-        //k++;
-        //myNarrative[k].name = "density of many compact spots";
-        //myNarrative[k].number = k;
+        //sequence 2
+        k++;
+        myNarrative[k].name = "density of many compact spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 7;
-        //myNarrative[k].nrOfSpots = 30;
-        //myNarrative[k].spotRadius = 0.3f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 7;
+        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].spotRadius = 0.3f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 10
-        //k++;
-        //myNarrative[k].name = "lower area position";
-        //myNarrative[k].number = k;
+        //sequence 3
+        k++;
+        myNarrative[k].name = "lower area position";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 30;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 1;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 1;
 
-        ////sequence 11
-        //k++;
-        //myNarrative[k].name = "density of few loose spots";
-        //myNarrative[k].number = k;
+        //sequence 4
+        k++;
+        myNarrative[k].name = "density of few loose spots";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 5;
-        //myNarrative[k].nrOfSpots = 15;
-        //myNarrative[k].spotRadius = 1f;
-        //myNarrative[k].spotsPosition = 0;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 15;
+        myNarrative[k].spotRadius = 1f;
+        myNarrative[k].spotsPosition = 0;
 
-        ////sequence 12
-        //k++;
-        //myNarrative[k].name = "top area position";
-        //myNarrative[k].number = k;
+        //sequence 5
+        k++;
+        myNarrative[k].name = "top area position";
+        myNarrative[k].number = k;
 
-        //myNarrative[k].speed = 0.2f;
-        //myNarrative[k].nrCircles = 3;
-        //myNarrative[k].nrOfSpots = 30;
-        //myNarrative[k].spotRadius = 0.6f;
-        //myNarrative[k].spotsPosition = 3;
+        myNarrative[k].speed = 0.2f;
+        myNarrative[k].nrCircles = 3;
+        myNarrative[k].nrOfSpots = 30;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 3;
 
         ////sequence 13
         //k++;
@@ -285,20 +320,9 @@ public class SeveralSpots : MonoBehaviour
         //myNarrative[k].spotRadius = 1.2f;
         //myNarrative[k].spotsPosition = 0;
 
-        ////sequence 15
-        //k++;
-        //myNarrative[k].name = "big spot radius few circles";
-        //myNarrative[k].number = k;
-
-        //myNarrative[k].speed = 0.1f;
-        //myNarrative[k].nrCircles = 5;
-        //myNarrative[k].nrOfSpots = 5;
-        //myNarrative[k].spotRadius = 1.2f;
-        //myNarrative[k].spotsPosition = 0;
-
-        //sequence 16
+        //sequence 6
         k++;
-        myNarrative[k].name = "custom";
+        myNarrative[k].name = "big spot radius few circles";
         myNarrative[k].number = k;
 
         myNarrative[k].speed = 0.1f;
@@ -307,11 +331,130 @@ public class SeveralSpots : MonoBehaviour
         myNarrative[k].spotRadius = 1.2f;
         myNarrative[k].spotsPosition = 0;
 
+        //sequence 16
+        k++;
+        myNarrative[k].name = "acceleration low";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.0288f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
+
+        //sequence 17
+        k++;
+        myNarrative[k].name = "acceleration fast";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.0288f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
+
+        ////sequence 18
+        //k++;
+        //myNarrative[k].name = "custom";
+        //myNarrative[k].number = k;
+
+        //myNarrative[k].speed = 0.1f;
+        //myNarrative[k].nrCircles = 5;
+        //myNarrative[k].nrOfSpots = 5;
+        //myNarrative[k].spotRadius = 1.2f;
+        //myNarrative[k].spotsPosition = 0;
+
+        //sequence 19
+        k++;
+        myNarrative[k].name = "general custom1";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
+
+        //sequence 20
+        k++;
+        myNarrative[k].name = "general custom2";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
+
+        //sequence 21
+        k++;
+        myNarrative[k].name = "general custom3";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.1f;
+        myNarrative[k].nrCircles = 5;
+        myNarrative[k].nrOfSpots = 5;
+        myNarrative[k].spotRadius = 1.2f;
+        myNarrative[k].spotsPosition = 0;
+
+        //sequence 22
+        k++;
+        myNarrative[k].name = "final mood";
+        myNarrative[k].number = k;
+
+        myNarrative[k].speed = 0.01f;
+        myNarrative[k].nrCircles = 1;
+        myNarrative[k].nrOfSpots = 1;
+        myNarrative[k].spotRadius = 0.6f;
+        myNarrative[k].spotsPosition = 0;
 
         //SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition);
 
 
+        //MAKE CUSTOM NARRATIVE - with initial mood, 3 randomly choosen sequences from collection and 3 customisable
+        totalNrOfSequences = k + 1; //including the initial mood at i=0
+        myCustomNarrative[0] = myNarrative[0]; //make first sequence the inital mood
+
+        //last element has index totalNrOfSequences-1 and the sup limit is excluded so add 1, also -4 (3 custom and final mood)
+        myCustomNarrative[1] = myNarrative[Random.Range(1, totalNrOfSequences - 1 - 4 + 1)]; 
+        //generate sequences for sequence 2 and 3, different
+        for (int i = 2; i <= 3; i++)
+        {
+            bool randomTest = false;
+            int iterations = 0;
+            int rnd = 0;
+            while (randomTest == false && iterations < 20)
+            {
+                iterations++;
+                rnd = Random.Range(1, totalNrOfSequences - 1 - 4 + 1);
+                randomTest = true;
+                for (int j = 1; j < i; j++)
+                {
+                    if (myNarrative[rnd].name == myNarrative[j].name)
+                        randomTest = false;
+                }
+            }
+            myCustomNarrative[i] = myNarrative[rnd];
+        }
+
+        for (int i = 0; i < totalNrOfSequences; i++)
+        {
+            if (myNarrative[i].name == "general custom1")
+                myCustomNarrative[4] = myNarrative[i];
+            else if (myNarrative[i].name == "general custom2")
+                myCustomNarrative[5] = myNarrative[i];
+            else if (myNarrative[i].name == "general custom3")
+                myCustomNarrative[6] = myNarrative[i];
+        }
+
+        //make last sequecne the final mood
+        myCustomNarrative[7] = myNarrative[totalNrOfSequences - 1];
+
+        //set the narrative as the custom narrative
+        myNarrative = myCustomNarrative;
+
     }
+
 
 
     // Update is called once per frame
@@ -319,12 +462,18 @@ public class SeveralSpots : MonoBehaviour
 
     {
 
+
+        if (GetComponent<Transform>().position != new Vector3(0f, 0f, 0f))
+        {
+            GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
+        }
         //myTotalTime += Time.deltaTime; //do not modify later in script
+        //there are 50 frames per second as set at the beginning of start
         myTotalTime = Time.frameCount * 0.02f;
         frameNumber = Time.frameCount;
 
         myFrameNumber++;
-        myTime = myFrameNumber * 0.02f;
+        myTime = (float)myFrameNumber * 0.02f;
 
 
         // SetSpotCollection(ref List<Spot> spotsList, float _speed, int _nrCircles, int _nrOfSpots, int _spotsPosition)
@@ -332,10 +481,16 @@ public class SeveralSpots : MonoBehaviour
 
         nrOfCurrentSequence = (int)(myTime / sequenceDuration);
 
-        if (myNarrative[nrOfCurrentSequence].name == "initial mood")
+        if (myNarrative[nrOfCurrentSequence].name == "initial mood" || myNarrative[nrOfCurrentSequence].name == "final mood")
         {
             myExamplesCanvas.enabled = true;
-        } else myExamplesCanvas.enabled = false;
+            centerlineGameObj.gameObject.SetActive(false);
+        }
+        else
+        {
+            myExamplesCanvas.enabled = false;
+            centerlineGameObj.gameObject.SetActive(true);
+        }
 
 
         //CUSTOM CANVAS
@@ -357,6 +512,54 @@ public class SeveralSpots : MonoBehaviour
             }
         }
         else myCustomizationCanvas.enabled = false;
+
+        //CUSTOM CANVAS
+        if (myNarrative[nrOfCurrentSequence].name == "general custom1")
+        {
+            myGeneralCustomizationCanvas.enabled = true;
+            int k = nrOfCurrentSequence;
+
+            myNarrative[k].speed = this.speed;
+            myNarrative[k].nrCircles = this.nrCircles;
+            myNarrative[k].nrOfSpots = this.nrOfSpots;
+            myNarrative[k].spotRadius = this.spotRadius;
+            myNarrative[k].spotsPosition = this.spotsPosition;
+
+            SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);
+
+        }
+        else if (myNarrative[nrOfCurrentSequence].name == "general custom2")
+        {
+            myGeneralCustomizationCanvas.enabled = true;
+            int k = nrOfCurrentSequence;
+
+            myNarrative[k].speed = this.speed;
+            myNarrative[k].nrCircles = this.nrCircles;
+            myNarrative[k].nrOfSpots = this.nrOfSpots;
+            myNarrative[k].spotRadius = this.spotRadius;
+            myNarrative[k].spotsPosition = this.spotsPosition;
+
+            SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);
+
+        }
+        else if (myNarrative[nrOfCurrentSequence].name == "general custom3")
+        {
+            myGeneralCustomizationCanvas.enabled = true;
+            int k = nrOfCurrentSequence;
+
+            myNarrative[k].speed = this.speed;
+            myNarrative[k].nrCircles = this.nrCircles;
+            myNarrative[k].nrOfSpots = this.nrOfSpots;
+            myNarrative[k].spotRadius = this.spotRadius;
+            myNarrative[k].spotsPosition = this.spotsPosition;
+
+            SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);
+
+        }
+        else
+        {
+            myGeneralCustomizationCanvas.enabled = false;
+        }
 
         //additional changes to narrative that are needed during runtime
         if (myNarrative[nrOfCurrentSequence].name == "random 1")
@@ -468,6 +671,73 @@ public class SeveralSpots : MonoBehaviour
             SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);
         }
 
+        //acceleration of velocity
+        if (myNarrative[nrOfCurrentSequence].name == "acceleration low")
+        {
+            //use timer as speed
+            if (timer <= 0.0288f)
+            {
+                ok = 1;
+                //timer = 0.0288f;
+            }
+
+            if (timer < 15 / 34.67 && ok == 1)
+            {
+                //add acceleration per secound - meaning per frame - there are 50 frames per secound
+                //accelerate with 1 cm/s, meaning adding 0.0288 at unity speed every secound, meaning adding 0.0288*0.02 every frame
+                //adjust acceleration using the timer
+                timer += 0.0288f * 0.02f;
+            }
+            else if (ok != -1 && timer > 15f / 34.67f)
+            {
+                ok = -1;
+            }
+            else if (timer > 0.0288f && ok == -1)
+            {
+                timer -= 0.0288f * 0.02f;
+            }
+
+            myNarrative[nrOfCurrentSequence].speed = timer;
+            Debug.Log("speed is " + timer);
+
+            int k = nrOfCurrentSequence;
+            SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);
+
+        }
+
+        //acceleration of velocity
+        if (myNarrative[nrOfCurrentSequence].name == "acceleration fast")
+        {
+            //use timer as speed
+            if (timer <= 0.0288f)
+            {
+                ok = 1;
+                //timer = 0.0288f;
+            }
+
+            if (timer < 15 / 34.67 && ok == 1)
+            {
+                //add acceleration per secound - meaning per frame - there are 50 frames per secound
+                //accelerate with 1 cm/s, meaning adding 0.0288 at unity speed every secound, meaning adding 0.0288*0.02 every frame
+                //adjust acceleration using the timer
+                timer += 0.0288f * 0.02f * 4f;
+            }
+            else if (ok != -1 && timer > 15f / 34.67f)
+            {
+                ok = -1;
+            }
+            else if (timer > 0.0288f && ok == -1)
+            {
+                timer -= 0.0288f * 0.02f * 4f;
+            }
+
+            myNarrative[nrOfCurrentSequence].speed = timer;
+            Debug.Log("speed is " + timer);
+
+            int k = nrOfCurrentSequence;
+            SetSpotCollection(ref spotsList, myNarrative[k].speed, myNarrative[k].nrCircles, myNarrative[k].nrOfSpots, myNarrative[k].spotsPosition, myNarrative[k].spotRadius);
+
+        }
 
         //narrative
 
@@ -506,11 +776,17 @@ public class SeveralSpots : MonoBehaviour
 
         //for manual changes
 
-        ChangeNrCirclesOnSpot(ref spotsList, nrCircles);
+        //ChangeNrCirclesOnSpot(ref spotsList, nrCircles);
 
-        ChangeNrOfSpots(ref spotsList, nrOfSpots);
+        //ChangeNrOfSpots(ref spotsList, nrOfSpots);
 
-        ChangePositionRange(ref spotsList, ref actualSpotPosition, spotsPosition);
+        //ChangePositionRange(ref spotsList, ref actualSpotPosition, spotsPosition);
+
+        //ChangeSpotRadius(ref spotsList, spotRadius);
+
+        ChangePositionRange_byCompacntess(ref spotsList, _compactness_facade_percentage);
+
+        ChangePositionOfCenterline(ref spotsList, _centerlineRange);
 
         //ChangeAnimationSpeed(ref spotsList, speed);
 
@@ -518,13 +794,22 @@ public class SeveralSpots : MonoBehaviour
         //update sliders
         if (myCustomizationCanvas.enabled == true)
         {
-            slider_nrOfSpots.value=this.nrOfSpots;
+            slider_nrOfSpots.value = this.nrOfSpots;
             slider_speed.value = this.speed;
             slider_nrCircles.value = this.nrCircles;
             slider_spotRadius.value = this.spotRadius;
             slider_spotsPosition.value = this.spotsPosition;
         }
 
+
+        //if (myGeneralCustomizationCanvas.enabled == true)
+        //{
+        //    slider_nrOfSpots.value = this.nrOfSpots;
+        //    slider_speed.value = this.speed;
+        //    slider_nrCircles.value = this.nrCircles;
+        //    slider_spotRadius.value = this.spotRadius;
+        //    slider_spotsPosition.value = this.spotsPosition;
+        //}
 
 
     }
@@ -543,7 +828,7 @@ public class SeveralSpots : MonoBehaviour
     {
         for (int i = 0; i < nrOfSpots; i++)
         {
-            Spot spot = Instantiate(spotPrefab, this.transform, false);
+            Spot spot = Instantiate(spotPrefab, centerlineGameObj.transform, false);
             spot.pointPrefab = pointPrefab;
             spot.transform.localPosition = new Vector3(Random.Range(minRangeX, maxRangeX), Random.Range(minRangeY, maxRangeY), 0f);
             spot.nrCircles = this.nrCircles;
@@ -575,13 +860,52 @@ public class SeveralSpots : MonoBehaviour
             }
             else if (_nrOfSpots > spotsList.Count)
             {
-                MakeSpots(_nrOfSpots - spotsList.Count, -1f, 4.5f, -1f, 3.5f);
+                MakeSpots(_nrOfSpots - spotsList.Count, 0f, this.facadeBase, centerLine - facadeHeight / 2 * (1 - compactness_facade_percentage), centerLine + facadeHeight / 2 * (1 - compactness_facade_percentage));
             }
 
             //update spotsList attributes
             this.nrOfSpots = spotsList.Count;
         }
 
+
+    }
+
+    //change the position of the spots without changing the list and with compactness - reducing the height of the facade's rectangle
+    public void ChangePositionRange_byCompacntess(ref List<Spot> spotsList, float _percentage)
+    {
+        if (compactness_facade_percentage != _percentage)
+        {
+            if (spotsList.Count != 0)
+            {
+                foreach (var spot in spotsList)
+                {
+                    spot.transform.localPosition = new Vector3(spot.mySpline.transform.localPosition.x, Random.Range(centerLine - facadeHeight / 2 * (1 - _percentage), centerLine + facadeHeight / 2 * (1 - _percentage)), 0f);
+                    Debug.Log("change position range for spot");
+                }
+            }
+            Debug.Log("change position range");
+
+            compactness_facade_percentage = _percentage;
+
+            //update animation spline
+            foreach (var spot in spotsList)
+            {
+                UpdateAnimationPosition_FollowSpot(spot);
+            }
+        }
+
+    }
+
+    public void ChangePositionOfCenterline(ref List<Spot> spotsList, float _centerlineRange)
+    {
+        if (_centerlineRange != this.centerlineRange)
+        {
+            centerLine = facadeHeight / 6f * (1 - _centerlineRange) + 5f * facadeHeight / 6f * (1 - _centerlineRange);
+            this.centerlineRange = _centerlineRange;
+
+            centerlineGameObj.transform.localPosition = new Vector3(centerlineGameObj.transform.localPosition.x, centerLine - facadeHeight / 2, 0);
+
+        }
 
     }
 
@@ -699,7 +1023,7 @@ public class SeveralSpots : MonoBehaviour
                     //add _mySpline prefab to the spot's mySpline and then modify it
                     spot.mySpline = Instantiate(_mySpline, this.transform, false);
                     spot.mySpline.transform.localPosition = spot.transform.localPosition;
-                    spot.mySpline.transform.localRotation = Quaternion.Euler(Random.Range(0, 90), 90, 90);
+                    spot.mySpline.transform.localRotation = Quaternion.Euler(Random.Range(80, 140), 90, 90);
 
                     //SplineAnimate settings
                     spotSplineAnimate.Container = spot.mySpline;
@@ -739,9 +1063,9 @@ public class SeveralSpots : MonoBehaviour
             _spot.mySplineAnimate = _spot.gameObject.AddComponent<SplineAnimate>();
 
             //add _mySpline prefab to the spot's mySpline and then modify it
-            _spot.mySpline = Instantiate(_mySpline, this.transform, false);
+            _spot.mySpline = Instantiate(_mySpline, _spot.transform.parent, false);
             _spot.mySpline.transform.localPosition = _spot.transform.localPosition;
-            _spot.mySpline.transform.localRotation = Quaternion.Euler(Random.Range(0, 90), 90, 90);
+            _spot.mySpline.transform.localRotation = Quaternion.Euler(Random.Range(80, 140), 90, 90);
 
             //SplineAnimate settings
             _spot.mySplineAnimate.Container = _spot.mySpline;
@@ -783,8 +1107,12 @@ public class SeveralSpots : MonoBehaviour
                         }
                         else
                         {
+                            float myOldTime = spot.mySplineAnimate.ElapsedTime;
+                            float myOldSpeed = spot.mySplineAnimate.MaxSpeed;
                             spot.mySplineAnimate.MaxSpeed = _speed;
                             spot.mySplineAnimate.Play();
+                            //move the object to the same position were it left before changing speed - otherwise it will be teleported to a different position
+                            spot.mySplineAnimate.ElapsedTime = myOldTime * (1 / _speed) * myOldSpeed;
                         }
 
                         this.speed = _speed;

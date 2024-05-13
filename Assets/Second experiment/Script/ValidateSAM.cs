@@ -31,6 +31,7 @@ public class ValidateSAM : MonoBehaviour
 
     public bool wasValidated;
     public SeveralSpots mySeveralSpots;
+    public Facade_features_general_to_UnityGeometry myGeneralFeatures;
 
     public string participantName;
 
@@ -66,7 +67,6 @@ public class ValidateSAM : MonoBehaviour
     {
         Debug.Log("validation clicked");
         //write the values to file
-        this.Validate();
         myEmotion[0] = pleasureValue = 0;
         myEmotion[1] = arousalValue = 0;
         myEmotion[2] = dominanceValue = 0;
@@ -100,7 +100,7 @@ public class ValidateSAM : MonoBehaviour
         StringBuilder output = new StringBuilder();
 
         //modify path according to computer and file location
-        string file = @"C:\Users\flori\Desktop\OutputOf_"+ participantName + ".csv";
+        string file = @"C:\Users\flori\Desktop\OutputOf_" + participantName + ".csv";
         if (new FileInfo(file).Exists == false)
         {
             string[] headings = { "pleasure",
@@ -116,7 +116,13 @@ public class ValidateSAM : MonoBehaviour
                                   "myTime",
                                   "myFrameNumber",
                                   "actualTime",
-                                  "actualFrameNumber"};
+                                  "actualFrameNumber",
+                                  "_procentageOpaqueOfFacade_",
+                                  "_compactnessOfElement_",
+                                  "_compactnessOfFacade_",
+                                  "_boundingRadiusOfElementProc_",
+                                  "_centerLineRange_",
+                                  "_realSpeed_"};
             output.AppendLine(string.Join(separator, headings));
         }
 
@@ -133,7 +139,13 @@ public class ValidateSAM : MonoBehaviour
                              mySeveralSpots.myTime.ToString(CultureInfo.InvariantCulture),
                              mySeveralSpots.myFrameNumber.ToString(),
                              mySeveralSpots.myTotalTime.ToString(CultureInfo.InvariantCulture),
-                             mySeveralSpots.frameNumber.ToString()};
+                             mySeveralSpots.frameNumber.ToString(),
+                             myGeneralFeatures._procentageOpaqueOfFacade_.ToString(),
+                             myGeneralFeatures._compactnessOfElement_.ToString(),
+                             myGeneralFeatures._compactnessOfFacade_.ToString(),
+                             myGeneralFeatures._boundingRadiusOfElementProc_.ToString(),
+                             myGeneralFeatures._centerLineRange_.ToString(),
+                             myGeneralFeatures._realSpeed_.ToString()};//put all general features
 
         //output.AppendLine("test");
         output.AppendLine(string.Join(separator, newLine));
